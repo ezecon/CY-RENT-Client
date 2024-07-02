@@ -72,7 +72,7 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-      <h1 className="text-3xl m-10 text-center hover:text-gray-500">Top 10 Users</h1>
+      <h1 className="text-3xl m-10 text-center hover:text-gray-500">Top 08 Users</h1>
       <TopUsers />
       <div className="m-10"></div>
     </div>

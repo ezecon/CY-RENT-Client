@@ -44,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/users');
+        const response = await axios.get('https://cy-rent-server.vercel.app/api/users');
         const users = response.data;
 
         console.log('User data fetched:', users); // Debugging log

@@ -87,7 +87,12 @@ const handleLogout = async () => {
     <Navbar className="mx-auto max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography as="div" className="mr-4 cursor-pointer py-1.5 font-medium">
-          <Link to="/">CY-RENT</Link>
+          <Link to="/">
+           <div className="flex font-bold">
+            <IoBicycleSharp />
+            CY-RENT
+           </div>
+          </Link>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
 

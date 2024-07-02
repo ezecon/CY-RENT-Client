@@ -90,7 +90,7 @@ const handleLogout = async () => {
         <Typography as="div" className="mr-4 cursor-pointer py-1.5 font-medium">
           <Link to="/">
            <div className="flex font-bold">
-            <IoBicycleSharp className="text-2xl pr-2" />
+            <IoBicycleSharp className="text-2xl pr-1" />
             CY-RENT
            </div>
           </Link>

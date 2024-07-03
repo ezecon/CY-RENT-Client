@@ -30,6 +30,7 @@ export default function Search() {
   };
 
   const renderProduct = filteredProducts
+    .filter((product) => product.category === "Available")
     .reverse()
     .map((item) => <PostCard key={item._id} data={item} />);
 

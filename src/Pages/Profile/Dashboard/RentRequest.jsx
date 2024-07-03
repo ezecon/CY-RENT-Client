@@ -65,15 +65,42 @@ export default function RentRequest() {
     }
   }, [userID, token]);
 
-  const handleAccept = (id) => {
-    axios.put(`https://cy-rent-server.vercel.app/api/rent-history/${id}`, { status: 'accepted' }, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+  const handleAccept = (id, owner, renter) => {
+    axios
+      .put(
+        `https://cy-rent-server.vercel.app/api/rent-history/${id}`,
+        { status: "accepted" },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         setPendingRequests((prevRequests) => prevRequests.filter((request) => request._id !== id));
         toast.success("Request accepted successfully");
+
+        // Update owner's number of rents
+        axios.put(
+          `https://cy-rent-server.vercel.app/api/users/${owner}`,
+          { $inc: { numberOfRent: 1 } },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        // Update renter's number of rents taken
+        axios.put(
+          `https://cy-rent-server.vercel.app/api/users/${renter}`,
+          { $inc: { numberOfRentTaken: 1 } },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
       })
       .catch((error) => {
         console.error("Error accepting request:", error);
@@ -197,7 +224,7 @@ export default function RentRequest() {
                       className="font-medium"
                     >
                       <div className="flex items-center gap-2">
-                        <Button className="bg-green-500" size="sm" onClick={() => handleAccept(item._id)}>
+                        <Button className="bg-green-500" size="sm" onClick={() => handleAccept(item._id,item.OwnerID,item.RenterID)}>
                           Accept
                         </Button>
                         <Button className="bg-red-500" size="sm" onClick={() => handleReject(item._id)}>
